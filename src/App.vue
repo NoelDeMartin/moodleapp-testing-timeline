@@ -1,6 +1,13 @@
 <template>
     <main class="flex flex-col items-center justify-center w-full h-full">
-        <button type="button" @click="showLabels = !showLabels">Toggle labels</button>
+        <button
+            type="button"
+            class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            @click="showLabels = !showLabels"
+        >
+            Toggle labels
+        </button>
+
         <ul class="relative self-stretch m-24 bg-gray-200 h-2 mt-40">
             <li
                 v-for="marker of computedMarkers"
