@@ -8,11 +8,11 @@
             Toggle labels
         </button>
 
-        <ul class="relative self-stretch m-24 bg-gray-200 h-2 mt-40">
+        <ul class="relative self-stretch m-24 bg-gray-300 h-1 mt-40">
             <li
                 v-for="marker of computedMarkers"
                 :key="marker.timestamp"
-                class="absolute top-1/2 -translate-y-1/2 w-1 h-24 bg-gray-200"
+                class="absolute top-1/2 -translate-y-1/2 w-1 h-24 bg-gray-300"
                 :style="`left: ${marker.delta * 100}%`"
             >
                 <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full text-lg">
