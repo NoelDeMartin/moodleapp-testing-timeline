@@ -1,12 +1,23 @@
 <template>
     <main class="flex flex-col items-center justify-center w-full h-full">
-        <button
-            type="button"
-            class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            @click="showLabels = !showLabels"
-        >
-            Toggle labels
-        </button>
+        <div class="flex gap-3">
+            <span v-if="revealed === 1">Showing {{ revealed }} event</span>
+            <span v-else>Showing {{ revealed }} events</span>
+            <button
+                type="button"
+                class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                @click="revealed--"
+            >
+                Show Less
+            </button>
+            <button
+                type="button"
+                class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                @click="revealed++"
+            >
+                Show More
+            </button>
+        </div>
 
         <ul class="relative self-stretch m-24 bg-gray-300 h-1 mt-40">
             <li
@@ -26,8 +37,8 @@
                 :style="`left: ${event.delta * 100}%`"
             >
                 <span
-                    v-if="showLabels"
-                    class="text-green-700 absolute left-1/2 -translate-x-1/2 whitespace-nowrap"
+                    v-if="revealed > i"
+                    class="text-green-700 absolute left-1/2 -translate-x-1/2 whitespace-nowrap bg-white/75"
                     :class="{
                         'top-0 -translate-y-full': !event.renderBelow,
                         'top-full': event.renderBelow,
@@ -36,7 +47,7 @@
                     {{ event.name }}
                 </span>
                 <span v-else>
-                    {{ i + 1 }}
+                    ?
                 </span>
             </li>
         </ul>
@@ -173,7 +184,7 @@ function computeMarker(marker: EventDate) {
     };
 }
 
-const showLabels = ref(true);
+const revealed = ref(0);
 const computedEvents = events.map(computeEvent);
 const computedMarkers = markers.map(computeMarker);
 </script>
