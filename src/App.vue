@@ -1,22 +1,8 @@
 <template>
     <main class="flex flex-col items-center justify-center w-full h-full">
         <div class="flex gap-3">
-            <span v-if="revealed === 1">Showing {{ revealed }} event</span>
-            <span v-else>Showing {{ revealed }} events</span>
-            <button
-                type="button"
-                class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                @click="revealed--"
-            >
-                Show Less
-            </button>
-            <button
-                type="button"
-                class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                @click="revealed++"
-            >
-                Show More
-            </button>
+            <span>Show events:</span>
+            <input type="range" min="0" :max="events.length" v-model="revealed" />
         </div>
 
         <ul class="relative self-stretch m-24 bg-gray-300 h-1 mt-40">
