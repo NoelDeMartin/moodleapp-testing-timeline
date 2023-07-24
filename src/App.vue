@@ -1,9 +1,9 @@
 <template>
     <main class="flex flex-col items-center justify-center w-full h-full">
-        <div class="flex gap-3">
+        <label class="flex gap-3">
             <span>Show events:</span>
             <input type="range" min="0" :max="events.length" v-model="revealed" />
-        </div>
+        </label>
 
         <ul class="relative self-stretch m-24 bg-gray-300 h-1 mt-40">
             <li
