@@ -2,7 +2,7 @@
     <main class="flex flex-col items-center justify-center w-full h-full">
         <label class="flex gap-3">
             <span>Show events:</span>
-            <input type="range" min="0" :max="events.length" v-model="revealed" />
+            <input type="range" min="0" :max="events.length + 1" v-model="revealed" />
         </label>
 
         <ul class="relative self-stretch m-24 bg-gray-300 h-1 mt-40">
@@ -18,12 +18,17 @@
             </li>
             <li
                 v-for="(event, i) in computedEvents"
+                class="flex items-center text-white justify-center font-bold absolute top-1/2 -translate-y-1/2 w-10 h-10 rounded-full"
+                :class="{
+                    'bg-[#b7d8c3]': revealed <= i,
+                    'bg-green-700': revealed > i,
+                    'ring ring-green-700 ring-offset-2': i == revealed - 1,
+                }"
                 :key="event.timestamp"
-                class="flex items-center text-white justify-center font-bold absolute top-1/2 -translate-y-1/2 w-10 h-10 bg-green-700 rounded-full"
                 :style="`left: ${event.delta * 100}%`"
             >
                 <span
-                    v-if="revealed > i"
+                    v-if="revealed > i && i != revealed - 1"
                     class="text-green-700 absolute left-1/2 -translate-x-1/2 whitespace-nowrap bg-white/75"
                     :class="{
                         'top-0 -translate-y-full': !event.renderBelow,
@@ -31,9 +36,6 @@
                     }"
                 >
                     {{ event.name }}
-                </span>
-                <span v-else>
-                    ?
                 </span>
             </li>
         </ul>
@@ -76,28 +78,35 @@ const today: EventDate = { // MoodleMoot 2023
 };
 const events: Event[] = [
     {
-        name: '1.0 Release',
+        name: 'Initial Release',
         date: {
             month: Months.April,
             year: 2013,
         },
     },
     {
-        name: 'Behat steps',
+        name: 'Manual Tests',
+        date: {
+            month: Months.July,
+            year: 2016,
+        },
+    },
+    {
+        name: 'Behat Steps',
         date: {
             month: Months.February,
             year: 2019,
         },
     },
     {
-        name: 'Behat tests',
+        name: 'Behat Tests',
         date: {
             month: Months.June,
             year: 2020,
         },
     },
     {
-        name: 'Unit tests',
+        name: 'Unit Tests',
         date: {
             month: Months.November,
             year: 2020,
@@ -105,14 +114,14 @@ const events: Event[] = [
         renderBelow: true,
     },
     {
-        name: 'Performance tests',
+        name: 'Performance Tests',
         date: {
             month: Months.September,
             year: 2021,
         },
     },
     {
-        name: 'Snapshot tests',
+        name: 'Snapshot Tests',
         date: {
             month: Months.February,
             year: 2023,
@@ -120,7 +129,7 @@ const events: Event[] = [
         renderBelow: true,
     },
     {
-        name: 'Tracker integration',
+        name: 'Tracker Integration',
         date: {
             month: Months.July,
             year: 2023,
